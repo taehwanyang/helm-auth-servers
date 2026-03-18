@@ -2,8 +2,8 @@
 
 이 Helm Chart는 Kubernetes 환경에서 다음 두 서비스를 배포합니다:
 
-- 🔐 Authorization Server
-- 🔓 Resource Server 
+- 🔐 Authorization Server  
+- 🔓 Resource Server  
 
 Ingress를 통해 외부 도메인으로 접근 가능하며, 내부적으로는 Kubernetes DNS를 사용하여 통신합니다.
 
@@ -11,6 +11,7 @@ Ingress를 통해 외부 도메인으로 접근 가능하며, 내부적으로는
 
 ## 🏗 Architecture
 
+```
 Client
   ↓
 Ingress (nginx)
@@ -27,6 +28,7 @@ Ingress (nginx)
 
 (Internal)
 Resource Server → Authorization Server (JWK 조회)
+```
 
 ---
 
@@ -42,6 +44,7 @@ Resource Server → Authorization Server (JWK 조회)
 
 ## 📁 Chart Structure
 
+```
 .
 ├── templates/
 │   ├── authorization-server-deployment.yaml
@@ -51,6 +54,7 @@ Resource Server → Authorization Server (JWK 조회)
 │   └── ingress.yaml
 ├── values.yaml
 └── Chart.yaml
+```
 
 ---
 
@@ -60,31 +64,43 @@ Resource Server → Authorization Server (JWK 조회)
 - Helm 3+
 - NGINX Ingress Controller
 - 도메인 설정 (예: auth.ythwork.com, resource.ythwork.com)
+
 ---
 
-## 🔧 도메인 설정 
+## 🔧 도메인 설정
 
-/etc/hosts 
+```bash
+sudo vi /etc/hosts
+```
+
+```
 127.0.0.1 auth.ythwork.com
 127.0.0.1 resource.ythwork.com
+```
 
 ---
 
 ## 📦 Installation
 
+```bash
 helm install auth-test . -n auth --create-namespace
+```
 
 ---
 
 ## 🔄 Upgrade
 
+```bash
 helm upgrade auth-test . -n auth
+```
 
 ---
 
 ## ❌ Uninstall
 
+```bash
 helm uninstall auth-test
+```
 
 ---
 
@@ -92,19 +108,21 @@ helm uninstall auth-test
 
 Resource Server는 다음과 같이 구성됩니다:
 
-- issuer-uri → 외부 도메인 (auth.ythwork.com)
+- issuer-uri → 외부 도메인 (`auth.ythwork.com`)
 - jwk-set-uri → 내부 서비스 DNS
 
-Environment Variables:
+### Environment Variables
 
+```bash
 SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK_SET_URI=http://auth-test-authorization-server/oauth2/jwks
+```
 
 ---
 
 ## 🌐 Ingress
 
-auth.ythwork.com → Authorization Server  
-resource.ythwork.com → Resource Server
+- auth.ythwork.com → Authorization Server  
+- resource.ythwork.com → Resource Server  
 
 ---
 
@@ -112,15 +130,24 @@ resource.ythwork.com → Resource Server
 
 ### Token 발급
 
+```bash
 curl -u client:secret \
   -X POST http://auth.ythwork.com/oauth2/token \
   -H "Content-Type: application/x-www-form-urlencoded" \
   -d "grant_type=password&username=user&password=1234"
+```
 
 ---
 
 ### Resource Server 호출
 
+```bash
 curl -H "Authorization: Bearer <access_token>" \
   http://resource.ythwork.com/api/read
+```
 
+---
+
+## 🔥 한 줄 요약
+
+👉 외부는 도메인 기반, 내부는 Kubernetes DNS 기반으로 분리한 OAuth2 Helm Chart
