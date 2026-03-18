@@ -1,0 +1,17 @@
+authorizationServer:
+  image:
+    repository: ythwork/authorization-server
+    tag: "0.0.1"
+  springProfile: "k3s"
+
+resourceServer:
+  image:
+    repository: ythwork/resource-server
+    tag: "0.0.1"
+  springProfile: "k3s"
+  jwkSetUri: ""
+
+ingress:
+  authorizationServerHost: "auth.ythwork.com"
+  resourceServerHost: "resource.ythwork.com"
+  

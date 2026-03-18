@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: {{ .Release.Namespace }}
+  name: {{ .Release.Name }}-authorization-server
+  labels:
+    app: authorization-server
+spec:
+  type: ClusterIP
+  selector:
+    app: authorization-server
+  ports:
+    - port: 80
+      protocol: TCP
+      targetPort: 8080

@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: {{ .Release.Namespace }}
+  name: {{ .Release.Name }}-resource-server
+  labels:
+    app: resource-server
+spec:
+  type: ClusterIP
+  selector:
+    app: resource-server
+  ports:
+    - port: 80
+      protocol: TCP
+      targetPort: 8081
