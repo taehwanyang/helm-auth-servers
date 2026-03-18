@@ -146,3 +146,8 @@ curl -H "Authorization: Bearer <access_token>" \
   http://resource.ythwork.com/api/read
 ```
 
+---
+
+## 🔥 중요
+
+Deployment에 replicas는 1이며 resource는 일부러 넣지 않았습니다. 
