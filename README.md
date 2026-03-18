@@ -146,8 +146,3 @@ curl -H "Authorization: Bearer <access_token>" \
   http://resource.ythwork.com/api/read
 ```
 
----
-
-## 🔥 한 줄 요약
-
-👉 외부는 도메인 기반, 내부는 Kubernetes DNS 기반으로 분리한 OAuth2 Helm Chart
