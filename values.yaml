@@ -12,6 +12,7 @@ resourceServer:
   jwkSetUri: ""
 
 ingress:
+  className: ""
   authorizationServerHost: "auth.ythwork.com"
   resourceServerHost: "resource.ythwork.com"
   
