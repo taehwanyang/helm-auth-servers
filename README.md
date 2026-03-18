@@ -83,7 +83,7 @@ sudo vi /etc/hosts
 ## 📦 Installation
 
 ```bash
-helm install auth-test . -n auth --create-namespace
+helm install auth-test . -n auth --create-namespace --set ingress.className=nginx
 ```
 
 ---
@@ -134,8 +134,9 @@ SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK_SET_URI=http://auth-test-authoriza
 curl -u client:secret \
   -X POST http://auth.ythwork.com/oauth2/token \
   -H "Content-Type: application/x-www-form-urlencoded" \
-  -d "grant_type=password&username=user&password=1234"
+  -d "grant_type=urn:ietf:params:oauth:grant-type:password&username=user&password=1234&scope=read"
 ```
+
 
 ---
 
