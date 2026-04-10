@@ -131,12 +131,11 @@ SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK_SET_URI=http://auth-test-authoriza
 ### Token 발급
 
 ```bash
-curl -u client:secret \
+curl -u client:secret123 \
   -X POST http://auth.ythwork.com/oauth2/token \
   -H "Content-Type: application/x-www-form-urlencoded" \
-  -d "grant_type=urn:ietf:params:oauth:grant-type:password&username=user&password=1234&scope=read"
+  -d "grant_type=client_credentials&scope=read"
 ```
-
 
 ---
 
