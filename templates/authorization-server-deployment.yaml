@@ -25,6 +25,10 @@ spec:
           env:
             - name: SPRING_PROFILES_ACTIVE
               value: {{ .Values.authorizationServer.springProfile | quote }}
+          volumeMounts:
+            - name: jwt-key
+              mountPath: /etc/keys
+              readOnly: true
           livenessProbe:
             httpGet:
               path: /actuator/health/liveness
@@ -37,4 +41,8 @@ spec:
               port: 8080
             initialDelaySeconds: 20
             periodSeconds: 10
+      volumes:
+        - name: jwt-key
+          secret:
+            secretName: {{ .Release.Name }}-auth-jwt-key
           
