@@ -1,0 +1,97 @@
+{
+  "defaultAction": "SCMP_ACT_ERRNO",
+  "defaultErrnoRet": 1,
+  "architectures": [
+    "SCMP_ARCH_AARCH64"
+  ],
+  "syscalls": [
+    {
+      "names": [
+        "accept",
+        "bind",
+        "brk",
+        "clock_getres",
+        "clock_nanosleep",
+        "close",
+        "close_range",
+        "connect",
+        "epoll_create1",
+        "epoll_ctl",
+        "epoll_pwait",
+        "eventfd2",
+        "execve",
+        "exit",
+        "faccessat",
+        "fchdir",
+        "fcntl",
+        "flock",
+        "fstat",
+        "fstatfs",
+        "ftruncate",
+        "futex",
+        "getcwd",
+        "getdents64",
+        "geteuid",
+        "getpid",
+        "getrandom",
+        "getrusage",
+        "getsockname",
+        "getsockopt",
+        "gettid",
+        "getuid",
+        "ioctl",
+        "listen",
+        "lseek",
+        "madvise",
+        "mkdirat",
+        "mmap",
+        "mprotect",
+        "munmap",
+        "newfstatat",
+        "openat",
+        "openat2",
+        "ppoll",
+        "prctl",
+        "pread64",
+        "prlimit64",
+        "read",
+        "readlinkat",
+        "recvfrom",
+        "rseq",
+        "rt_sigaction",
+        "rt_sigprocmask",
+        "rt_sigreturn",
+        "sched_getaffinity",
+        "sched_yield",
+        "sendmmsg",
+        "set_robust_list",
+        "set_tid_address",
+        "setsockopt",
+        "shutdown",
+        "socket",
+        "socketpair",
+        "statx",
+        "sysinfo",
+        "uname",
+        "write"
+      ],
+      "action": "SCMP_ACT_ALLOW"
+    },
+    {
+      "names": ["clone"],
+      "action": "SCMP_ACT_ALLOW",
+      "args": [
+        {
+          "index": 0,
+          "value": 2114060288,
+          "op": "SCMP_CMP_MASKED_EQ"
+        }
+      ]
+    },
+    {
+      "names": ["clone3"],
+      "action": "SCMP_ACT_ERRNO",
+      "errnoRet": 38
+    }
+  ]
+}
